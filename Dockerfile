@@ -59,6 +59,18 @@ ENV PATH /maven/bin:$PATH
 
 
 
+# ACTIVATOR
+RUN mkdir -p /tmp/activator
+RUN wget "http://downloads.typesafe.com/typesafe-activator/1.3.5/typesafe-activator-1.3.5-minimal.zip?_ga=1.157653811.88315381.1434350067" \
+    -O /tmp/activator/activator.zip
+WORKDIR /tmp/activator
+RUN unzip activator.zip
+RUN cp -r $(unzip -l activator.zip | grep -o -E "[activator-]+[0-9.]*-minimal/$") /activator/
+RUN rm -rf /tmp/activator
+ENV PATH  /activator/:$PATH
+
+
+
 # # USER
 # RUN groupadd -r builder -g 433 && \
 #     useradd -u 431 -r -g builder -d /home/builder -s /sbin/nologin -c "Docker image user" builder && \
@@ -70,3 +82,4 @@ ENV PATH /maven/bin:$PATH
 # RUN echo "alias l=\"ls -larth\"" >> /home/builder/.zshrc
 
 # USER builder
+WORKDIR /
