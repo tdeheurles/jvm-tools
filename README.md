@@ -4,7 +4,7 @@
 
 ### TODO
 - Create a user different than root for this stuff => Need to look at busybox how to
-- Test on windows with boot2docker
+- I had some trouble trying with windows. The path are interpreted different than expecting. Need to find a way.
 
 ### You need [docker](https://github.com/tdeheurles/docs/tree/master/docker)
 
@@ -54,13 +54,13 @@ We will create a scala/sbt project (via activator), build it, and run it. We wil
 First create the project :
 ```
 ➜ docker run \
-  --rm  \
-  -v ~/.ivy2:/root/.ivy2  \
-  -v ~/.sbt:/root/.sbt \
-  -v ~/.activator:/root/.activator \
-  -v `pwd`:/workspace \
-  -ti jvm-tools \
-  /bin/bash -c "cd /workspace ; activator new"
+    --rm  \
+    -v ~/.ivy2:/root/.ivy2  \
+    -v ~/.sbt:/root/.sbt \
+    -v ~/.activator:/root/.activator \
+    -v `pwd`:/workspace \
+    -ti jvm-tools \
+    /bin/bash -c "cd /workspace ; activator new"
 ```
 
 And this is the output :
