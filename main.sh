@@ -1,5 +1,6 @@
 # import names
 . ./release.cfg
+
 artifact_name="gcr.io/$projectid/$servicename"
 artifact_tag="$artifact_name:$servicemajor.$serviceminor.$BUILD_NUMBER"
 
