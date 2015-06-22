@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # import names
 . ./release.cfg
 artifact_name="gcr.io/$projectid/$servicename"
