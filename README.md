@@ -20,7 +20,7 @@ If you want him to build something for you, you give him the volume where he'll 
 ## what you need
 - the path to the sources... should not be a problem
 - For caches, the path in the container where the tools will cache everything (look at the Tools Path Section), and a path where you want to store that on your HOST
-- you need to generate jvm-tools :
+- you need to generate jvm-tools (or just get it with : `docker pull tdeheurles/jvm-tools:latest`):
 ```
 # Go to the Dockerfile path
 ➜ cd dockerFilePath
