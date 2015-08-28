@@ -4,9 +4,12 @@
 
 ### TODO
 - Create a user different than root for this stuff => Need to look at busybox how to
-- I had some trouble trying with windows. The path are interpreted different than expecting. Need to find a way.
+- For windows/mac, you need to understand that the shared path for docker are the one in your VM (boot2docker or default for docker tools). These solution generaly have an automated shared folder (/C/Users/ ... for windows)
 
-### You need [docker](https://github.com/tdeheurles/docs/tree/master/docker)
+### You need [docker](https://docs.docker.com/installation/)
+
+### dockerhub
+ - you can test without building the image : `docker pull tdeheurles/jvm-tools:latest`
 
 ### The idea
 You ask a container to do some work for you.
