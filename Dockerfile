@@ -1,25 +1,25 @@
-FROM        gliderlabs/alpine:3.1
+FROM        gliderlabs/alpine:latest
 MAINTAINER  tdeheurles@gmail.com
 
 RUN apk update
 RUN apk upgrade
-# RUN apk add alpine-sdk # ~140 Mo
 RUN apk-install sudo
 RUN apk-install wget
 RUN apk-install bash
 RUN apk-install zsh
-# RUN apk-install git
-# RUN apk-install tar
-
-
-
 
 
 # JAVA
 ENV JAVA_VERSION=8 \
-    JAVA_UPDATE=45 \
-    JAVA_BUILD=14 \
+    JAVA_UPDATE=60 \
+    JAVA_BUILD=27 \
     JAVA_HOME=/usr/lib/jvm/default-jvm
+
+# ACTIVATOR
+ENV ACTIVATOR_VERSION=1.3.6
+
+# MAVEN
+ENV $MAVEN3_VERSION=3.3.3
 
 # Here we use several hacks collected from https://github.com/gliderlabs/docker-alpine/issues/11:
 # 1. install GLibc (which is not the cleanest solution at all)
@@ -48,11 +48,11 @@ RUN apk add --update wget ca-certificates && \
 
 
 # MAVEN
-RUN wget "http://apache.mirrors.ovh.net/ftp.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz"
-RUN tar -xvzC /tmp -f apache-maven-3.3.3-bin.tar.gz
-RUN mv /tmp/apache-maven-3.3.3 /maven
-RUN rm apache-maven-3.3.3-bin.tar.gz
-RUN rm -rf /tmp/apache-maven-3.3.3
+RUN wget "http://apache.mirrors.ovh.net/ftp.apache.org/dist/maven/maven-3/$MAVEN3_VERSION/binaries/apache-maven-$MAVEN3_VERSION-bin.tar.gz"
+RUN tar -xvzC /tmp -f apache-maven-$MAVEN3_VERSION-bin.tar.gz
+RUN mv /tmp/apache-maven-$MAVEN3_VERSION /maven
+RUN rm apache-maven-$MAVEN3_VERSION-bin.tar.gz
+RUN rm -rf /tmp/apache-maven-$MAVEN3_VERSION
 ENV MAVEN_PATH /maven
 ENV PATH /maven/bin:$PATH
 
@@ -61,7 +61,7 @@ ENV PATH /maven/bin:$PATH
 
 # ACTIVATOR
 RUN mkdir -p /tmp/activator
-RUN wget "http://downloads.typesafe.com/typesafe-activator/1.3.5/typesafe-activator-1.3.5-minimal.zip?_ga=1.157653811.88315381.1434350067" \
+RUN wget "http://downloads.typesafe.com/typesafe-activator/$ACTIVATOR_VERSION/typesafe-activator-$ACTIVATOR_VERSION-minimal.zip" \
     -O /tmp/activator/activator.zip
 WORKDIR /tmp/activator
 RUN unzip activator.zip
@@ -71,15 +71,4 @@ ENV PATH  /activator/:$PATH
 
 
 
-# # USER
-# RUN groupadd -r builder -g 433 && \
-#     useradd -u 431 -r -g builder -d /home/builder -s /sbin/nologin -c "Docker image user" builder && \
-#     chown -R builder:builder /home/builder
-#
-# RUN touch /home/builder/.zshrc
-# RUN echo " " >> /home/builder/.zshrc
-# RUN echo "# Alias" >> /home/builder/.zshrc
-# RUN echo "alias l=\"ls -larth\"" >> /home/builder/.zshrc
-
-# USER builder
 WORKDIR /
