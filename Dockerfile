@@ -19,7 +19,7 @@ ENV JAVA_VERSION=8 \
 ENV ACTIVATOR_VERSION=1.3.6
 
 # MAVEN
-ENV $MAVEN3_VERSION=3.3.3
+ENV MAVEN3_VERSION=3.3.3
 
 # Here we use several hacks collected from https://github.com/gliderlabs/docker-alpine/issues/11:
 # 1. install GLibc (which is not the cleanest solution at all)
