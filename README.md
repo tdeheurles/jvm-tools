@@ -1,3 +1,5 @@
+[![](https://badge.imagelayers.io/tdeheurles/jvm-tools:latest.svg)](https://imagelayers.io/?images=tdeheurles/jvm-tools:latest 'Get your own badge on imagelayers.io')
+
 # jvm-tools
 
 ## Compile or run without jvm installation
